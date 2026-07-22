@@ -1,0 +1,63 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-14, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Register checkout as the tap
+        run: brew tap vkarabinovych/tap "$GITHUB_WORKSPACE"
+
+      - name: Find changed formulae
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [[ -n "$GITHUB_BASE_REF" ]]; then
+              base="origin/$GITHUB_BASE_REF"
+          elif [[ -n "$BEFORE_SHA" && ! "$BEFORE_SHA" =~ ^0+$ ]]; then
+              base="$BEFORE_SHA"
+          else
+              base="$(git hash-object -t tree /dev/null)"
+          fi
+
+          git diff --name-only --diff-filter=ACMR "$base" "$GITHUB_SHA" -- \
+              'Formula/*.rb' > "$RUNNER_TEMP/changed-formulae"
+          if [[ -s "$RUNNER_TEMP/changed-formulae" ]]; then
+              echo "Changed formulae:"
+              sed 's/^/  /' "$RUNNER_TEMP/changed-formulae"
+          else
+              echo "No formula changes to test."
+          fi
+
+      - name: Validate changed formulae
+        run: |
+          while IFS= read -r formula_file; do
+              formula="vkarabinovych/tap/$(basename "$formula_file" .rb)"
+              brew style "$formula"
+              brew audit --strict --online "$formula"
+          done < "$RUNNER_TEMP/changed-formulae"
+
+      - name: Install and test changed formulae
+        run: |
+          while IFS= read -r formula_file; do
+              formula="vkarabinovych/tap/$(basename "$formula_file" .rb)"
+              brew install --build-from-source "$formula"
+              brew test "$formula"
+              brew uninstall "$formula"
+          done < "$RUNNER_TEMP/changed-formulae"
