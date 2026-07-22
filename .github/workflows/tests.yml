@@ -21,9 +21,6 @@ jobs:
 
       - uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Register checkout as the tap
-        run: brew tap vkarabinovych/tap "$GITHUB_WORKSPACE"
-
       - name: Find changed formulae
         env:
           BEFORE_SHA: ${{ github.event.before }}
