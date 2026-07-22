@@ -1,0 +1,36 @@
+class Dotlad < Formula
+  desc "Install packages and deploy dotfiles from a manifest-driven project"
+  homepage "https://github.com/vkarabinovych/dotlad"
+  url "https://github.com/vkarabinovych/dotlad/releases/download/v0.9.0/dotlad-0.9.0.tar.gz"
+  sha256 "8d5662487a032c20a62ae68d66ab97010a22192cb3f38aa4c155a99db887d957"
+  license "MIT"
+
+  def install
+    libexec.install "VERSION", "dotlad", "uninstall.sh", "bin", "lib"
+    (libexec/".dotlad-homebrew").write "dotlad Homebrew installation\n"
+    bin.write_exec_script libexec/"dotlad"
+  end
+
+  def caveats
+    zshrc = File.expand_path("~/.zshrc")
+    completion_configured = File.file?(zshrc) &&
+                            File.foreach(zshrc).any? do |line|
+                              line.include?("source <(dotlad completion zsh)")
+                            end
+    return "Zsh completion is already configured in #{zshrc}.\n" if completion_configured
+
+    <<~EOS
+      To enable native Zsh completion, add this to ~/.zshrc:
+
+        if ! grep -qF 'source <(dotlad completion zsh)' ~/.zshrc 2>/dev/null; then
+          printf '\\n# Dotlad Zsh completion\\nautoload -Uz compinit && compinit\\nsource <(dotlad completion zsh)\\n' >> ~/.zshrc
+        fi
+    EOS
+  end
+
+  test do
+    assert_match version.to_s, shell_output("#{bin}/dotlad --version")
+    assert_match "install a project's packages and configs", shell_output("#{bin}/dotlad help")
+    assert_match "brew uninstall dotlad", shell_output("#{bin}/dotlad uninstall")
+  end
+end
