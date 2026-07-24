@@ -45,7 +45,7 @@ jobs:
       - name: Validate changed formulae
         run: |
           while IFS= read -r formula_file; do
-              formula="vkarabinovych/tap/$(basename "$formula_file" .rb)"
+              formula="ter-sh/tap/$(basename "$formula_file" .rb)"
               brew style "$formula"
               brew audit --strict --online "$formula"
           done < "$RUNNER_TEMP/changed-formulae"
@@ -53,7 +53,7 @@ jobs:
       - name: Install and test changed formulae
         run: |
           while IFS= read -r formula_file; do
-              formula="vkarabinovych/tap/$(basename "$formula_file" .rb)"
+              formula="ter-sh/tap/$(basename "$formula_file" .rb)"
               brew install --build-from-source "$formula"
               brew test "$formula"
               brew uninstall "$formula"

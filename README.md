@@ -1,12 +1,12 @@
 # Homebrew tap
 
 Personal Homebrew formulae maintained by
-[vkarabinovych](https://github.com/vkarabinovych).
+[ter-sh](https://github.com/ter-sh).
 
 ## Install
 
 ```bash
-brew install vkarabinovych/tap/<formula>
+brew install ter-sh/tap/<formula>
 ```
 
 Homebrew adds the tap automatically on first install. Formulae can then be
