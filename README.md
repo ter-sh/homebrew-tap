@@ -1,12 +1,12 @@
 # Homebrew tap
 
 Personal Homebrew formulae maintained by
-[vkarabinovych](https://github.com/vkarabinovych).
+[go-min](https://github.com/go-min).
 
 ## Install
 
 ```bash
-brew install vkarabinovych/tap/<formula>
+brew install go-min/tap/<formula>
 ```
 
 Homebrew adds the tap automatically on first install. Formulae can then be
