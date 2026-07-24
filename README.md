@@ -1,7 +1,7 @@
 # Homebrew tap
 
 Personal Homebrew formulae maintained by
-[vkarabinovych](https://github.com/ter-sh).
+[ter-sh](https://github.com/ter-sh).
 
 ## Install
 
