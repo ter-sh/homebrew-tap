@@ -1,8 +1,8 @@
 class Dotlad < Formula
   desc "Install packages and deploy dotfiles from a manifest-driven project"
   homepage "https://github.com/go-min/dotlad"
-  url "https://github.com/go-min/dotlad/releases/download/v0.9.0/dotlad-0.9.0.tar.gz"
-  sha256 "8d5662487a032c20a62ae68d66ab97010a22192cb3f38aa4c155a99db887d957"
+  url "https://github.com/go-min/dotlad/releases/download/v0.10.0/dotlad-0.10.0.tar.gz"
+  sha256 "8093c191e94af0fe334409323a34e6b633d9229626247a7421ca6d64ba935610"
   license "MIT"
 
   def install
