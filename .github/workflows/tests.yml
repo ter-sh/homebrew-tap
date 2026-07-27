@@ -27,7 +27,8 @@ jobs:
         run: |
           if [[ -n "$GITHUB_BASE_REF" ]]; then
               base="origin/$GITHUB_BASE_REF"
-          elif [[ -n "$BEFORE_SHA" && ! "$BEFORE_SHA" =~ ^0+$ ]]; then
+          elif [[ -n "$BEFORE_SHA" && ! "$BEFORE_SHA" =~ ^0+$ ]] &&
+              git cat-file -e "$BEFORE_SHA^{commit}" 2>/dev/null; then
               base="$BEFORE_SHA"
           else
               base="$(git hash-object -t tree /dev/null)"
