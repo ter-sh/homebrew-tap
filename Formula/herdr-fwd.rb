@@ -1,7 +1,6 @@
 class HerdrFwd < Formula
   desc "Automatic loopback port forwarding for remote Herdr sessions"
   homepage "https://github.com/go-min/herdr-fwd"
-  version "0.1.4"
   license "MIT"
 
   on_macos do
