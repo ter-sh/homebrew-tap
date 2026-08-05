@@ -5,21 +5,21 @@ class HerdrFwd < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.4/herdr-fwd-macos-aarch64.tar.gz"
-      sha256 "355175568d5ef0346413a256f4a1bd2d3f9e79d76f6341e06cdae8b55ac4fd54"
+      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.5/herdr-fwd-macos-aarch64.tar.gz"
+      sha256 "9978ff0589f576b475e24294d9b53624c05dd0139c431140eba1d10f26aebd05"
     else
-      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.4/herdr-fwd-macos-x86_64.tar.gz"
-      sha256 "02c0687555892ef8344b4f57a3fd0e432140578e05a8d1531a3c285f3142bcc6"
+      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.5/herdr-fwd-macos-x86_64.tar.gz"
+      sha256 "3f58a6bb5162b7a17e3232853851f53fe51f884bec6edf8b4f55cb8bfefb5b43"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.4/herdr-fwd-linux-aarch64.tar.gz"
-      sha256 "a0916ba40727c4fd425907f2653fac4d1c06e06809ec7cbb465b90a05ddaf7dd"
+      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.5/herdr-fwd-linux-aarch64.tar.gz"
+      sha256 "328c0e0cf4f4b56d104fdd334aa0dc096a2a0579ad624528e8df8cfa393e3a06"
     else
-      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.4/herdr-fwd-linux-x86_64.tar.gz"
-      sha256 "56a5b6a9324647f8855131e4ddd5a99b1e29999bc3e5453088923d9b15d1570a"
+      url "https://github.com/go-min/herdr-fwd/releases/download/v0.1.5/herdr-fwd-linux-x86_64.tar.gz"
+      sha256 "1e5f0aeb1ea737e4f6af877ca074656c5a68f766e0fe741c25f74df36e2d159c"
     end
   end
 
